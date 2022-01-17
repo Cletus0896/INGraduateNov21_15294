@@ -1,0 +1,81 @@
+-- DDL Create --
+CREATE TABLE IF NOT EXISTS book(
+	bookid NUMERIC(2) UNIQUE NOT NULL,
+	bookname VARCHAR(50) NOT NULL,
+	publicationdate DATE NOT NULL,
+	author VARCHAR(50) NOT NULL
+);
+-- DML INSERT --
+INSERT INTO book VALUES (
+1,'BOOK1','1990-01-01','Author1'
+),
+(
+2,'BOOK2','1990-01-01','Author2'
+),
+(
+3,'BOOK3','1990-01-01','Author3'
+),
+(
+4,'BOOK4','1990-01-01','Author4'
+);
+SELECT * from book;
+DROP table book;
+
+CREATE TABLE IF NOT EXISTS book(
+	bookid NUMERIC(2) CONSTRAINT PK_BOOKID PRIMARY KEY,
+	bookname VARCHAR(50) NOT NULL,
+	publicationdate DATE NOT NULL,
+	author VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS product(
+productid NUMERIC(999) CONSTRAINT PK_productid PRIMARY KEY,
+productname varchar(50) NOT NULL,
+unit_price NUMERIC(7,2) CHECK (unit_price > 0),
+quantity NUMERIC(3) DEFAULT 100,
+discount NUMERIC(7,2) DEFAULT 0
+);
+
+INSERT INTO product VALUES (
+1,'p1',20.0,100,0),
+(
+2,'p2',20.0,100,0),
+(
+3,'p3',20.0,100,0);
+
+select * from product;
+
+INSERT INTO product(productid,productname,unit_price)VALUES (5,'p5',20.0);
+
+INSERT INTO product(productid,productname,unit_price)VALUES (5,'p5',-20.0);
+
+CREATE TABLE accounts (
+	user_id serial PRIMARY KEY,
+	username VARCHAR ( 50 ) UNIQUE NOT NULL,
+	password VARCHAR ( 50 ) NOT NULL,
+	email VARCHAR ( 255 ) UNIQUE NOT NULL,
+	created_on TIMESTAMP NOT NULL,
+    last_login TIMESTAMP 
+);
+
+CREATE TABLE roles(
+   role_id serial PRIMARY KEY,
+   role_name VARCHAR (255) UNIQUE NOT NULL
+);
+
+CREATE TABLE account_roles(
+user_id INT NOT NULL,
+role_id INT NOT NULL,
+grant_date TIMESTAMP,
+PRIMARY KEY(user_id,role_id),
+FOREIGN KEY(user_id) REFERENCES accounts(user_id),
+FOREIGN KEY(role_id) REFERENCES roles(role_id)
+);
+
+CREATE TABLE temp1(
+id NUMERIC(2) PRIMARY KEY,
+name VARCHAR(20)
+);
+
+
+
